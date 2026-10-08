@@ -110,6 +110,11 @@
 <body>
 
 <header>
+        <h1>Oversized Store</h1>
+        <p>Moda Cristã & Minimalista • Essência que Vestem</p>
+        <div style="margin-top: 15px;">
+            <a href="/produtos/novo" style="font-size: 13px; color: #111; text-decoration: none; border: 1px solid #111; padding: 6px 12px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px;">+ Cadastrar Produto</a>
+        </div>
     <h1>Oversized Store</h1>
     <p>Moda Cristã & Minimalista • Essência que Vestem</p>
 </header>
@@ -117,15 +122,25 @@
 <div class="container">
     <div class="grid">
         <!-- Loop do Thymeleaf para percorrer a lista de produtos vinda do Java -->
+        <!-- Loop do Thymeleaf para percorrer a lista de produtos vinda do Java -->
         <div class="card" th:each="produto : ${produtos}">
-            <img class="card-img" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Camiseta Oversized">
+            <!-- Link na imagem levando para a página de detalhes do produto -->
+            <a th:href="@{/produto/{id}(id=${produto.id})}">
+                <img class="card-img" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Camiseta Oversized">
+            </a>
+
             <div class="card-body">
                 <div class="categoria" th:text="${produto.categoria}">Categoria</div>
-                <h3 class="card-title" th:text="${produto.nome}">Nome do Produto</h3>
+
+                <!-- Link no título levando para a página de detalhes do produto -->
+                <a th:href="@{/produto/{id}(id=${produto.id})}" style="text-decoration: none; color: inherit;">
+                    <h3 class="card-title" th:text="${produto.nome}">Nome do Produto</h3>
+                </a>
+
                 <p class="card-desc" th:text="${produto.descricao}">Descrição breve da camiseta.</p>
                 <div class="card-footer">
                     <span class="preco" th:text="'R$ ' + ${produto.preco}">R$ 0,00</span>
-                    <button class="btn">Comprar</button>
+                    <a th:href="@{/produto/{id}(id=${produto.id})}" class="btn" style="text-decoration: none; text-align: center; display: inline-block;">Comprar</a>
                 </div>
             </div>
         </div>
